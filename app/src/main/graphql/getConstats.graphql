@@ -1,0 +1,14 @@
+query GetConstats {
+    getConstats(pagination: { page: 1, limit: 50 }) {
+        data {
+            id
+            driverAId
+            driverBId
+            dateTime
+            location
+            injuredCount
+            createdAt
+            status
+        }
+    }
+}
