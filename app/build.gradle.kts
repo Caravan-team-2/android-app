@@ -44,9 +44,15 @@ android {
         }
         release {
             isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
+            )
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://ab90c2a4e077.ngrok-free.app/\""
             )
         }
     }
@@ -131,15 +137,24 @@ dependencies {
     implementation(libs.bundles.ktor)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.androidx.animation.graphics)
+    implementation(libs.mapbox.android)
     implementation(libs.mapbox.maps.compose)
     implementation(libs.play.services.location)
     implementation(libs.image.labeling)
+    implementation("com.google.mlkit:text-recognition:16.0.0")
+    implementation("com.google.mlkit:image-labeling:17.0.8")
+    implementation("com.google.mlkit:camera:16.0.0-beta3")
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.bundles.ktor)
     testImplementation(libs.truth)
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("io.ktor:ktor-client-mock:2.3.4")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     implementation(libs.apollo.runtime)
     implementation(libs.zxing.core)
     implementation(libs.compose.qr.code)

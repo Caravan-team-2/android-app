@@ -1,5 +1,6 @@
 package smartcaravans.constat.client.auth.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -87,18 +88,18 @@ class AuthViewModel(
             }
 
             is AuthUiAction.IdentityScanned -> {
+                Log.i("AuthViewModel", "Scanned image received: ${action.file?.path}")
                 sendEvent(Event.AuthNavigate(NavRoutes.IdentityVerification))
                 _uiState.update {
                     it.copy(scannedImage = action.file)
                 }
             }
             AuthUiAction.Upload -> {
+                sendEvent(Event.LaunchMainActivity)
                 _uiState.value.scannedImage?.let { file ->
                     viewModelScope.launch(Dispatchers.IO) {
                         fileUploadUseCase(file)
-                            .onSuccess {
-                                sendEvent(Event.LaunchMainActivity)
-                            }.onError {
+                            .onError {
                                 sendEvent(Event.AuthShowMessage(it.messageRes))
                             }
                     }

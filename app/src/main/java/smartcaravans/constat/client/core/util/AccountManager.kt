@@ -5,13 +5,13 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import smartcaravans.constat.client.core.domain.models.User
 
-class AccountManager(val dataStore: DataStore<ApiData>) {
+open class AccountManager(val dataStore: DataStore<ApiData>) {
     private val _user = dataStore.data.map { it.user }
-    val user = _user
+    open val user = _user
 
     suspend fun getUser() = dataStore.data.map { it.user }.first()
 
-    suspend fun update(newUser: User?) = dataStore.updateData {
+    open suspend fun update(newUser: User?) = dataStore.updateData {
         it.copy(user = newUser)
     }
 

@@ -14,6 +14,7 @@ import smartcaravans.constat.client.core.util.map
 import smartcaravans.constat.client.main.presentation.navigation.routes.ConstatsScreen
 import smartcaravans.constat.client.main.presentation.navigation.routes.CreateConstatScreen
 import smartcaravans.constat.client.main.presentation.navigation.routes.HomeScreen
+import smartcaravans.constat.client.main.presentation.viewmodel.ConstatFormState
 import smartcaravans.constat.client.main.presentation.viewmodel.MainUiAction
 import smartcaravans.constat.client.main.presentation.viewmodel.MainViewModel
 import smartcaravans.constat.client.main.util.mapToVehicles
@@ -54,6 +55,9 @@ fun NavigationScreen(
             )
         }
         composable<NavRoutes.CreateConstat> {
+            LaunchedEffect(Unit) {
+                viewModel.onAction(MainUiAction.SetConstatFormState(ConstatFormState()))
+            }
             CreateConstatScreen(
                 formState,
                 vehicles = vehicles,

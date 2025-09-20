@@ -40,8 +40,8 @@ fun IdentityScan(
                 modifier = Modifier.fillMaxWidth(),
             )
         }
-        CameraView {
-            viewModel.onAction(AuthUiAction.IdentityScanned(it))
+        CameraView { file, _ ->
+            viewModel.onAction(AuthUiAction.IdentityScanned(file))
         }
     }
 }

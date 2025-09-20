@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import se.warting.signaturepad.SignaturePadAdapter
 import se.warting.signaturepad.SignaturePadView
@@ -43,6 +44,7 @@ fun SignaturePad(
         Box(Modifier.fillMaxWidth().aspectRatio(ratio)) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
+                color = Color.White,
                 shape = MaterialTheme.shapes.large,
                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurfaceVariant.copy(0.2f)),
             ) {

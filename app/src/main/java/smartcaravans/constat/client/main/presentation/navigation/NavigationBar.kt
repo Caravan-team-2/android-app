@@ -1,5 +1,8 @@
 package smartcaravans.constat.client.main.presentation.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.material3.Icon
@@ -11,9 +14,11 @@ import androidx.compose.material3.ShortNavigationBarItem
 import androidx.compose.material3.ShortNavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -40,15 +45,20 @@ fun NavigationBar(
                         null,
                     )
                 },
-                label = if (selected) {
+                label =
                     {
-                        Text(
-                            stringResource(screen.title),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
-                } else null,
+                        AnimatedVisibility(
+                            selected,
+                            enter = expandIn(expandFrom = Alignment.CenterStart),
+                            exit = shrinkOut(shrinkTowards = Alignment.CenterStart)
+                        ) {
+                            Text(
+                                stringResource(screen.title),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                            )
+                        }
+                    },
                 onClick = {
                     navigate(screen.destination)
                 },

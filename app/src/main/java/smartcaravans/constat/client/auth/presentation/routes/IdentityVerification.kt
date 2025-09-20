@@ -2,18 +2,22 @@ package smartcaravans.constat.client.auth.presentation.routes
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +32,6 @@ import androidx.core.net.toUri
 import smartcaravans.constat.client.R
 import smartcaravans.constat.client.auth.presentation.viewmodel.AuthUiAction
 import smartcaravans.constat.client.auth.presentation.viewmodel.AuthViewModel
-import smartcaravans.constat.client.core.presentation.CameraView
 import smartcaravans.constat.client.core.presentation.MyImage
 import younesbouhouche.musicplayer.core.presentation.util.ExpressiveButton
 
@@ -61,19 +64,38 @@ fun IdentityVerification(
                 fontWeight = FontWeight.Bold
             )
             Spacer(Modifier.height(8.dp))
-            Text(
-                stringResource(R.string.make_sure_your_id_card),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            Column(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
-            )
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                val checklistItems = stringResource(R.string.make_sure_your_id_card).split("\n")
+                checklistItems.forEach { item ->
+                    if (item.isNotBlank()) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(Modifier.width(12.dp))
+                            Text(
+                                text = item.trim(),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
             Spacer(Modifier.height(16.dp))
             Text(
                 stringResource(R.string.please_confirm_that),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 16.dp),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
             )
             Spacer(Modifier.height(8.dp))
             Text(
@@ -90,7 +112,9 @@ fun IdentityVerification(
                 stringResource(R.string.confirm),
                 ButtonDefaults.MediumContainerHeight,
                 Modifier.fillMaxWidth()
-            ) { }
+            ) {
+                viewModel.onAction(AuthUiAction.Upload)
+            }
             ExpressiveButton(
                 stringResource(R.string.retake),
                 ButtonDefaults.MediumContainerHeight,

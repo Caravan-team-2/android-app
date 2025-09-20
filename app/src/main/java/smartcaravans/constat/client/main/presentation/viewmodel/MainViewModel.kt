@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import smartcaravans.constat.client.core.domain.models.User
 import smartcaravans.constat.client.core.domain.util.onError
@@ -52,7 +53,10 @@ class MainViewModel(
     fun onAction(action: MainUiAction) {
         when(action) {
             is MainUiAction.SetConstatSheetState -> _uiState.update {
-                it.copy(constatSheetState = action.state, owner = action.owner)
+                it.copy(
+                    constatSheetState = action.state,
+                    owner = action.owner
+                )
             }
 
             is MainUiAction.Scanned -> {
@@ -117,10 +121,32 @@ class MainViewModel(
             MainUiAction.ConstatDialogBack -> _formState.update {
                 it.copy(step = FormStep.entries[max(it.step.ordinal - 1, 0)])
             }
-            MainUiAction.ConstatDialogNext -> _formState.update {
-                it.copy(step = FormStep.entries[min(it.step.ordinal + 1, FormStep.entries.size - 1)])
+            MainUiAction.ConstatDialogNext -> {
+                val hasErrors = when(_formState.value.step) {
+                    FormStep.VehicleInfo ->  {
+                        _formState.updateAndGet {
+                            it.copy(vehicleInfo = it.vehicleInfo.withErrors())
+                        }.vehicleInfo.hasErrors()
+                    }
+                    FormStep.InsuranceInfo ->  {
+                        _formState.updateAndGet {
+                            it.copy(insuranceFormState = it.insuranceFormState.withErrors())
+                        }.insuranceFormState.hasErrors()
+                    }
+                    else -> false
+                }
+                if (hasErrors) return
+                _formState.update {
+                    it.copy(step = FormStep.entries[min(
+                        it.step.ordinal + 1,
+                        FormStep.entries.size - 1
+                    )])
+                }
             }
-            is MainUiAction.SetConstatFormState -> _formState.value = action.state
+            is MainUiAction.SetConstatFormState -> _formState.value = action.state.copy(
+                vehicleInfo = action.state.vehicleInfo.clearErrors(),
+                insuranceFormState = action.state.insuranceFormState.clearErrors()
+            )
         }
     }
 }

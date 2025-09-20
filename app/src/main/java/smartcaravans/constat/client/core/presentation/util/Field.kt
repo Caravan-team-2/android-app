@@ -13,4 +13,23 @@ enum class Field {
     MODEL,
     TYPE,
     REGISTRATION_NUMBER,
+    // Constat form fields
+    VEHICLE,
+    LOCATION,
+    DATE_TIME,
+    DESCRIPTION,
+    DRIVER_NAME,
+    LICENSE_NUMBER,
+    INJURED_COUNT,
+    WITNESS_NAME,
+    WITNESS_PHONE,
+    // Additional form fields
+    ADDRESS,
+    LICENSE_GIVEN_BY,
+    LICENSE_GIVEN_AT,
+    INSURANCE_COMPANY,
+    VALID_FROM,
+    VALID_TO,
+    COMING_FROM,
+    GOING_TO,
 }

@@ -19,3 +19,20 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep public class smartcaravans.constat.client.auth.presentation.navigation.NavRoutes
+-keep public class smartcaravans.constat.client.auth.presentation.navigation.NavRoutes$*
+-keep public class smartcaravans.constat.client.main.presentation.navigation.NavRoutes
+-keep public class smartcaravans.constat.client.main.presentation.navigation.NavRoutes$*
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-keep class androidx.credentials.playservices.** {
+  *;
+}
+-keepnames class smartcaravans.constat.client.auth.presentation.navigation.NavRoutes
+-keepnames class smartcaravans.constat.client.main.presentation.navigation.NavRoutes
+-keepnames class * extends smartcaravans.constat.client.auth.presentation.navigation.NavRoutes
+-keepnames class * extends smartcaravans.constat.client.main.presentation.navigation.NavRoutes
+-keep public class smartcaravans.constat.client.core.domain.models$*
+-keep public class smartcaravans.constat.client.auth.domain.dto.AuthResponse
+-keep public class smartcaravans.constat.client.auth.domain.dto.AuthResult
+-keep public class smartcaravans.constat.client.auth.domain.dto$*

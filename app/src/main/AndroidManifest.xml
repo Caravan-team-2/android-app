@@ -67,6 +67,10 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
         </activity>
+        <activity android:name=".settings.presentation.SettingsActivity" />
+        <activity android:name=".settings.presentation.routes.language.LanguageActivity" />
+        <activity android:name=".settings.presentation.routes.about.AboutActivity" />
+        <activity android:name=".settings.presentation.routes.theme.ThemeActivity" />
     </application>
 
 </manifest>

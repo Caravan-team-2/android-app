@@ -31,13 +31,6 @@ enum class Permissions(
         R.string.permission_camera_message,
         Icons.Default.Camera
     ),
-//    STORAGE(
-//        android.Manifest.permission.READ_EXTERNAL_STORAGE,
-//        1003,
-//        R.string.permission_storage_title,
-//        R.string.permission_storage_message,
-//        Icons.Default.Storage
-//    ),
     NOTIFICATIONS(
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             android.Manifest.permission.POST_NOTIFICATIONS

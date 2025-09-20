@@ -23,7 +23,8 @@ class App : Application(), ImageLoaderFactory {
                 repoModule,
                 useCaseModule,
                 authModule,
-                mainModule
+                mainModule,
+                settingsModule
             )
         }
     }

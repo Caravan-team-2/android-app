@@ -3,6 +3,7 @@ package smartcaravans.constat.client.core.presentation
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -11,6 +12,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -26,6 +28,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import smartcaravans.constat.client.R
 import smartcaravans.constat.client.core.presentation.util.InputError
 import soup.compose.material.motion.animation.materialFadeIn
@@ -36,6 +39,7 @@ fun MyTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
     enabled: Boolean = true,
     label: String = "",
     placeholder: String = "",
@@ -65,6 +69,10 @@ fun MyTextField(
             }
         },
         shape = MaterialTheme.shapes.medium,
+        textStyle = LocalTextStyle.current.copy(
+            lineHeight = LocalTextStyle.current.lineHeight * 1.5f
+        ),
+        readOnly = readOnly,
         enabled = enabled,
         label = { Text(label) },
         interactionSource = interactionSource,

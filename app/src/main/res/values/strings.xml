@@ -218,9 +218,46 @@
 
     <!-- Vehicle error messages -->
     <string name="error_empty_make">La marque est requise</string>
+    <string name="error_invalid_make">La marque ne peut contenir que des lettres, espaces et tirets</string>
     <string name="error_empty_model">Le modèle est requis</string>
+    <string name="error_invalid_model">Le modèle ne peut contenir que des lettres, chiffres, espaces et tirets</string>
     <string name="error_empty_type">Le type est requis</string>
     <string name="error_empty_registration_number">Le numéro d\'immatriculation est requis</string>
+    <string name="error_invalid_registration_number">Le numéro d\'immatriculation ne peut contenir que des lettres majuscules, chiffres, tirets et espaces</string>
+
+    <!-- Constat form error messages -->
+    <string name="error_empty_location">La localisation est requise</string>
+    <string name="error_short_location">La localisation doit contenir au moins 5 caractères</string>
+    <string name="error_empty_date_time">La date et l\'heure sont requises</string>
+    <string name="error_empty_description">La description est requise</string>
+    <string name="error_short_description">La description doit contenir au moins 10 caractères</string>
+    <string name="error_empty_driver_name">Le nom du conducteur est requis</string>
+    <string name="error_invalid_driver_name">Le nom du conducteur ne peut contenir que des lettres, espaces, tirets et apostrophes</string>
+    <string name="error_empty_license_number">Le numéro de permis est requis</string>
+    <string name="error_invalid_license_number">Le numéro de permis ne peut contenir que des lettres majuscules, chiffres et tirets</string>
+    <string name="error_empty_injured_count">Le nombre de blessés est requis</string>
+    <string name="error_invalid_injured_count">Le nombre de blessés doit être un nombre valide</string>
+    <string name="error_negative_injured_count">Le nombre de blessés ne peut pas être négatif</string>
+    <string name="error_invalid_witness_name">Le nom du témoin ne peut contenir que des lettres, espaces, tirets et apostrophes</string>
+    <string name="error_invalid_witness_phone">Veuillez saisir un numéro de téléphone valide pour le témoin</string>
+
+    <!-- Additional form validation errors -->
+    <string name="error_empty_address">L\'adresse est requise</string>
+    <string name="error_short_address">L\'adresse doit contenir au moins 10 caractères</string>
+    <string name="error_empty_license_given_by">L\'autorité d\'émission du permis est requise</string>
+    <string name="error_invalid_license_given_by">L\'autorité d\'émission ne peut contenir que des lettres et espaces</string>
+    <string name="error_empty_license_given_at">La date d\'émission du permis est requise</string>
+    <string name="error_invalid_license_given_at">La date d\'émission ne peut pas être dans le futur</string>
+    <string name="error_empty_insurance_company">La compagnie d\'assurance est requise</string>
+    <string name="error_invalid_insurance_company">Le nom de la compagnie d\'assurance ne peut contenir que des lettres, espaces et tirets</string>
+    <string name="error_empty_valid_from">La date de début de validité est requise</string>
+    <string name="error_invalid_valid_from">La date de début de validité ne peut pas être dans le futur</string>
+    <string name="error_empty_valid_to">La date de fin de validité est requise</string>
+    <string name="error_invalid_valid_to">La date de fin de validité doit être postérieure à la date de début</string>
+    <string name="error_empty_coming_from">Le lieu de départ est requis</string>
+    <string name="error_short_coming_from">Le lieu de départ doit contenir au moins 3 caractères</string>
+    <string name="error_empty_going_to">Le lieu de destination est requis</string>
+    <string name="error_short_going_to">Le lieu de destination doit contenir au moins 3 caractères</string>
 
     <!-- Identity Scan Screen -->
     <string name="id_scan_text">Positionnez votre carte d\'identité dans le cadre</string>
@@ -228,7 +265,11 @@
     <string name="retake">Reprendre</string>
     <string name="after_detected_your_photo">Après détection, votre photo</string>
     <string name="please_confirm_that">Veuillez confirmer que</string>
-    <string name="make_sure_your_id_card">Lisible, claire et non floue\nBien éclairée, non réfléchissante, pas trop sombre\nLa carte d\'identité occupe la majeure partie de l\'image</string>
+    <string name="make_sure_your_id_card">
+        Lisible, claire et non floue
+        \nBien éclairée, non réfléchissante, pas trop sombre
+        \nLa carte d\'identité occupe la majeure partie de l\'image
+    </string>
     <string name="id_in_not_expired">La carte d\'identité n\'est pas expirée</string>
     <string name="current_location">Position actuelle</string>
     <string name="renew_your_insurance_plan">Renouvelez votre plan d\'assurance</string>
@@ -247,8 +288,8 @@
     <string name="constat_qr_code_title">Scanner pour partager</string>
     <string name="constat_qr_code_description">Scannez le code QR pour vous connecter et remplir le constat instantanément.</string>
     <string name="personal_info">Informations personnelles</string>
-    <string name="vehicle_info">Informations du véhicule</string>
-    <string name="insurance_info">Informations d\'assurance</string>
+    <string name="vehicle_info">Véhicule</string>
+    <string name="insurance_info">Assurance</string>
     <string name="pictures">Photos</string>
     <string name="draw">Dessiner</string>
     <string name="signature">Signature</string>
@@ -264,6 +305,14 @@
     <string name="create_constat">Créer un constat</string>
     <string name="valid_from">Valide à partir de</string>
     <string name="insurance_company">Compagnie d\'assurance</string>
-    <string name="coming_from">Coming From</string>
-    <string name="going_to">Going To</string>
+    <string name="coming_from">Venant de</string>
+    <string name="going_to">Allant à</string>
+    <string name="damages">Dommages</string>
+    <string name="address">Adresse</string>
+    <string name="choisissez_un_v_hicule">Choisissez un véhicule</string>
+    <string name="error_no_vehicle_selected">Aucun véhicule sélectionné</string>
+    <string name="please_select_a_vehicle">Veuillez sélectionner un véhicule</string>
+    <string name="no_pictures_yet">Aucune photo pour le moment</string>
+    <string name="delete_photo">Supprimer la photo</string>
+    <string name="no_photos_yet">Pas de photos</string>
 </resources>

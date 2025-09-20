@@ -1,5 +1,6 @@
 package smartcaravans.constat.client.main.presentation.navigation.routes
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.slideInHorizontally
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,7 +25,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -49,13 +50,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import smartcaravans.constat.client.R
 import smartcaravans.constat.client.UserInsurrancesQuery
+import smartcaravans.constat.client.core.util.getBackDispatcher
+import smartcaravans.constat.client.main.presentation.navigation.routes.forms.DamagesFormScreen
 import smartcaravans.constat.client.main.presentation.navigation.routes.forms.InsuranceInfoFormScreen
-import smartcaravans.constat.client.main.presentation.navigation.routes.forms.PersonalInfoFormScreen
 import smartcaravans.constat.client.main.presentation.navigation.routes.forms.PictureFormScreen
 import smartcaravans.constat.client.main.presentation.navigation.routes.forms.VehicleFormScreen
 import smartcaravans.constat.client.main.presentation.viewmodel.ConstatFormState
 import smartcaravans.constat.client.main.presentation.viewmodel.FormStep
-import smartcaravans.constat.client.main.presentation.viewmodel.MainUiAction
 import smartcaravans.constat.client.ui.theme.AppTheme
 import younesbouhouche.musicplayer.core.presentation.util.ExpressiveButton
 import younesbouhouche.musicplayer.core.presentation.util.ExpressiveIconButton
@@ -71,6 +72,7 @@ fun CreateConstatScreen(
     onPrev: () -> Unit = {},
     onStateChange: (ConstatFormState) -> Unit = {},
 ) {
+    val backDispatcher = getBackDispatcher()
     Column(modifier.fillMaxSize().statusBarsPadding()) {
         Row(Modifier
             .padding(24.dp)
@@ -106,14 +108,6 @@ fun CreateConstatScreen(
             },
         ) { step ->
             when(step) {
-                FormStep.PersonalInfo ->
-                    PersonalInfoFormScreen(
-                        formState.personalInfoForm,
-                        {
-                            onStateChange(formState.copy(personalInfoForm = it))
-                        },
-                        Modifier.weight(1f)
-                    )
                 FormStep.VehicleInfo ->
                     VehicleFormScreen(
                         formState.vehicleInfo,
@@ -128,6 +122,14 @@ fun CreateConstatScreen(
                         formState.insuranceFormState,
                         {
                             onStateChange(formState.copy(insuranceFormState = it))
+                        },
+                        Modifier.weight(1f)
+                    )
+                FormStep.Damages ->
+                    DamagesFormScreen(
+                        formState.damagesForm,
+                        {
+                            onStateChange(formState.copy(damagesForm = it))
                         },
                         Modifier.weight(1f)
                     )
@@ -165,11 +167,15 @@ fun CreateConstatScreen(
                         .weight(weight),
                     outlined = index == 0,
                     interactionSource = interactionSource,
-                    onClick = if (index == 0) onPrev else onNext
-                )
+                    enabled = (index == 1) or (formState.step.ordinal > 0)
+                ) {
+                    if (index == 0) backDispatcher?.onBackPressed()
+                    else onNext()
+                }
             }
         }
     }
+    BackHandler(formState.step.ordinal > 0, onPrev)
 }
 
 @Composable

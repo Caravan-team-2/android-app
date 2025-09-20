@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import smartcaravans.constat.client.R
 import smartcaravans.constat.client.UserInsurrancesQuery
+import smartcaravans.constat.client.core.presentation.LocationTextField
 import smartcaravans.constat.client.core.presentation.MyTextField
 import smartcaravans.constat.client.main.presentation.navigation.routes.VehicleCard
 import smartcaravans.constat.client.main.presentation.viewmodel.MainUiAction
@@ -42,9 +43,16 @@ fun VehicleFormScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier.verticalScroll(rememberScrollState()).fillMaxSize(),
+        modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Text(
+            stringResource(R.string.choisissez_un_v_hicule),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
         LazyRow(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
@@ -71,7 +79,9 @@ fun VehicleFormScreen(
                     Column(
                         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.heightIn(min = 200.dp).fillMaxSize()
+                        modifier = Modifier
+                            .heightIn(min = 200.dp)
+                            .fillMaxSize()
                     ) {
                         Icon(
                             Icons.Default.Add,
@@ -89,21 +99,26 @@ fun VehicleFormScreen(
                 }
             }
         }
-        MyTextField(
+        formState.vehicleError?.let {
+            Text(
+                stringResource(R.string.please_select_a_vehicle),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.error
+            )
+        }
+        LocationTextField(
             formState.comingFrom,
             {
                 onStateChange(formState.copy(comingFrom = it))
             },
             label = stringResource(R.string.coming_from),
-            error = formState.comingFromError,
         )
-        MyTextField(
+        LocationTextField(
             formState.goingTo,
             {
                 onStateChange(formState.copy(goingTo = it))
             },
             label = stringResource(R.string.going_to),
-            error = formState.goingToError,
         )
     }
 
